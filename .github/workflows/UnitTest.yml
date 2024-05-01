@@ -26,6 +26,6 @@ jobs:
           ${{ runner.os }}-gradle-
     - name: Check code formatting
       run: ./gradlew checkstyleMain checkstyleTest
-    - name: Run tests
-      run: ./gradlew test
+    - name: UnitTest
+      run: ./gradlew testDebugUnitTest
 
