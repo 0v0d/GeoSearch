@@ -17,9 +17,6 @@ jobs:
     name: "Unit Tests"
     runs-on: ubuntu-latest
     steps:
-      - name: "Git Checkout"
-        uses: actions/checkout@v4
-
       - uses: ./.github/actions/gradle-task-run
         with:
           gradle-tasks: "testDebugUnitTest"
