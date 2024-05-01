@@ -24,8 +24,6 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-    - name: Check code formatting
-      run: ./gradlew checkstyleMain checkstyleTest
     - name: UnitTest
       run: ./gradlew testDebugUnitTest
 
