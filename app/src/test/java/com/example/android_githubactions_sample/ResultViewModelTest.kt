@@ -19,7 +19,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Response
@@ -50,23 +49,9 @@ class ResultViewModelTest {
         name = "Tokyo",
         localNames = mapOf(
             "cy" to "Tokyo",
-            "tg" to "Токио",
             "es" to "Tokio",
             "pl" to "Tokio",
-            "ru" to "Токио",
-            "lv" to "Tokija",
             "en" to "Tokyo",
-            "th" to "โตเกียว",
-            "da" to "Tokyo",
-            "oc" to "Tòquio",
-            "kn" to "ಟೋಕ್ಯೊ",
-            "mi" to "Tōkio",
-            "eo" to "Tokio",
-            "et" to "Tōkyō",
-            "be" to "Токіа",
-            "fa" to "توکیو",
-            "fi" to "Tokio",
-            "bg" to "Токио",
             "tr" to "Tokyo",
             "ja" to "東京都",
         ),
