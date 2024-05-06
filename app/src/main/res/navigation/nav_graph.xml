@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/nav_graph"
+	app:startDestination="@+id/InputFragment">
+
+	<fragment
+		android:id="@+id/InputFragment"
+		android:name="com.example.android_githubactions_sample.view.InputFragment"
+		tools:layout="@layout/fragment_input">
+		<action
+			android:id="@+id/action_to_resultFragment"
+			app:destination="@id/ResultFragment" />
+	</fragment>
+
+	<fragment
+		android:id="@+id/ResultFragment"
+		android:name="com.example.android_githubactions_sample.view.ResultFragment"
+		tools:layout="@layout/fragment_result">
+		<argument
+			android:name="inputText"
+			app:argType="string" />
+	</fragment>
+</navigation>
