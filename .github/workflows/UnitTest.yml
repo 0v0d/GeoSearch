@@ -10,20 +10,21 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  unit_tests:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK
+        uses: actions/setup-java@v3
+        with:
+           java-version: 17
+      - name: chmod gradlew
+        run: chmod +x ./gradlew
+      - name: from Secrets
+        env:
+         API_KEY: ${{ secrets.API_KEY }}
+        run: echo API_KEY="$API_KEY" > ./local.properties
 
-    - uses: actions/checkout@v3
-    - name: Set up JDK 
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    - name: chmod gradlew
-      run: chmod +x gradlew
-
-    - name: unit test
-      run: ./gradlew build
+      - name: Unit tests
+        run: ./gradlew test
 
