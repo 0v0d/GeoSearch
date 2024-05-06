@@ -2,7 +2,6 @@
 <resources>
 	<string name="app_name">UITest</string>
 	<string name="enter_text">Enter text</string>
-	<string name="enter">Enter</string>
 	<string name="latitude">latitude:</string>
 	<string name="longitude">longitude:</string>
 </resources>
