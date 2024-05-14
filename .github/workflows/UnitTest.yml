@@ -22,7 +22,7 @@ jobs:
            distribution: 'adopt'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v4
         with:
          api-levels: 34
          target-sdk: 34
@@ -37,7 +37,7 @@ jobs:
         run: echo API_KEY="$API_KEY" > ./local.properties
 
       - name: Cache Gradle packages
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
