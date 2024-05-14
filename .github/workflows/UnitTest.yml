@@ -22,7 +22,7 @@ jobs:
            distribution: 'adopt'
 
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v4
+        uses: android-actions/setup-android@v3
         with:
          api-levels: 34
          target-sdk: 34
