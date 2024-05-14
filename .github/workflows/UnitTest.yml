@@ -23,12 +23,7 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-        with:
-          components: |
-            build-tools;34.0.0
-            platforms;android-34
-
-
+        
       - name: chmod gradlew
         run: chmod +x ./gradlew
       - name: from Secrets
@@ -49,8 +44,9 @@ jobs:
 
       - name: Unit tests
         run: ./gradlew testDebugUnitTest
+        
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v4
-        if: always()
+        if: success() || failure()
         with:
           report_paths: '**/build/test-results/testDebugUnitTest/TEST-*.xml'
