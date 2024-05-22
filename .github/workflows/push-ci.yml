@@ -27,8 +27,10 @@ jobs:
       API_KEY: ${{ secrets.API_KEY }}
 
   auto-merge:
-    needs: [Lint, unit_tests]
+    needs: [ Lint, unit_tests ]
     if: ${{ github.event_name == 'pull_request' && (github.event.action == 'opened' || github.event.action == 'synchronize' || github.event.action == 'reopened') }}
     uses: ./.github/workflows/auto-merge.yml
+    permissions:
+      contents: read
     secrets:
       CI_TOKEN: ${{ secrets.CI_TOKEN }}
