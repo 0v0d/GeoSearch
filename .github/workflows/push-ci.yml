@@ -33,6 +33,7 @@ jobs:
     permissions:
       checks: write
       pull-requests: write
+      contents: read
 
     secrets:
       CI_TOKEN: ${{ secrets.CI_TOKEN }}
