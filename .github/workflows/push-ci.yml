@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+    
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
+permissions:
+  checks: write
+  contents: read
+
+jobs:
+  Lint:
+    uses: ./.github/workflows/call-lint.yml
+    secrets:
+      API_KEY: ${{ secrets.API_KEY }}
+  unit_tests:
+    uses: ./.github/workflows/call-unit-test.yml
+    secrets:
+      API_KEY: ${{ secrets.API_KEY }}
+
