@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.android_githubactions_sample.databinding.FragmentInputBinding
 
-
 class InputFragment : Fragment() {
     private var _binding: FragmentInputBinding? = null
     private val binding get() = _binding!!
