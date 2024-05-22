@@ -7,8 +7,8 @@ on:
         required: true
 
 permissions:
+  contents: write
   pull-requests: write
-  contents: read
 
 jobs:
   auto-merge:
@@ -17,13 +17,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Merge PR
+      - name: Configure Git
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+
+      - name: Merge branch
         env:
           CI_TOKEN: ${{ secrets.CI_TOKEN }}
         run: |
-          PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-          curl -s -X PUT \
-            -H "Authorization: token $CI_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/merge" \
-            -d '{"commit_title": "Auto-merging PR", "merge_method": "merge"}'
+          git checkout dev
+          git checkout -b temp-branch
+          git checkout master
+          git pull origin master
+          git merge temp-branch --no-ff --allow-unrelated-histories || true
+
+      - name: Handle merge conflicts
+        if: failure()
+        run: |
+          echo "Merge conflicts detected. Attempting to resolve..."
+          git checkout --ours .
+          git add .
+          git commit -m "Resolved merge conflicts"
+
+      - name: Push changes
+        run: |
+          git push origin master
