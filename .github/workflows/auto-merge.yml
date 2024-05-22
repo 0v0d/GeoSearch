@@ -25,7 +25,6 @@ jobs:
         env:
           CI_TOKEN: ${{ secrets.CI_TOKEN }}
         run: |
-          git checkout dev
           git checkout -b temp-branch
           git checkout master
           git pull origin master
@@ -41,4 +40,4 @@ jobs:
 
       - name: Push changes
         run: |
-          git push origin master
+          git push origin master 2>&1
