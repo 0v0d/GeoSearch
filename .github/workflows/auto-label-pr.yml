@@ -6,7 +6,7 @@ on:
 
 jobs:
   add-label:
-  　name: Add automerge Label
+    name: Add automerge Label
     runs-on: ubuntu-latest
 
     steps:
