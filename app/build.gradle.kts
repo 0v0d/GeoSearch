@@ -1,6 +1,3 @@
-@file:Suppress("UnstableApiUsage")
-
-val ktlint: Configuration by configurations.creating
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -30,7 +27,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -72,40 +69,9 @@ dependencies {
     testImplementation(libs.androidx.runner)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockito.core)
-    testImplementation (libs.androidx.core.testing)
-
+    testImplementation(libs.androidx.core.testing)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.uiautomator)
-
-    ktlint(libs.ktlint) {
-        attributes {
-            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
-        }
-    }
-}
-val outputDir = "${project.layout.buildDirectory.get().asFile}/reports/ktlint/"
-val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
-
-val ktlintCheck by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    group = "ktlint"
-    description = "Check Kotlin code style."
-    classpath = ktlint
-    mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("src/**/*.kt")
-}
-
-val ktlintFormat by tasks.creating(JavaExec::class) {
-    inputs.files(inputFiles)
-    outputs.dir(outputDir)
-
-    group = "ktlint"
-    description = "Fix Kotlin code style deviations."
-    classpath = ktlint
-    mainClass.set("com.pinterest.ktlint.Main")
-    args = listOf("-F", "src/**/*.kt")
 }
