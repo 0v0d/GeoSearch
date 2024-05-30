@@ -22,9 +22,11 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
-      - run: ./gradlew ktlint
 
       - name: Run ktlint
+        run: ./gradlew ktlint
+
+      - name: Upload ktlint artifact
         uses: actions/upload-artifact@v3
         with:
           name: ktlint-output
