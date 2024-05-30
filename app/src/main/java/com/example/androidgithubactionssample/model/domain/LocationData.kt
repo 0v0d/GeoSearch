@@ -10,7 +10,7 @@ data class LocationData(
     val localNames: Map<String, String>,
     val lat: String,
     val lon: String,
-    val country: String
+    val country: String,
 ) : Parcelable {
     fun getLocalName(): String {
         return localNames[Locale.getDefault().language] ?: ""

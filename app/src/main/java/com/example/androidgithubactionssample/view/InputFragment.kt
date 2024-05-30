@@ -12,10 +12,11 @@ import com.example.androidgithubactionssample.databinding.FragmentInputBinding
 class InputFragment : Fragment() {
     private var _binding: FragmentInputBinding? = null
     private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentInputBinding.inflate(inflater, container, false)
         binding.inputText.setOnEditorActionListener { _, actionId, _ ->
@@ -29,9 +30,10 @@ class InputFragment : Fragment() {
     }
 
     private fun navigateToResultFragment(text: String) {
-        val action = InputFragmentDirections.actionToResultFragment(
-            text
-        )
+        val action =
+            InputFragmentDirections.actionToResultFragment(
+                text,
+            )
         findNavController().navigate(action)
     }
 

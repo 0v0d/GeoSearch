@@ -45,47 +45,52 @@ class ResultViewModelTest {
         Dispatchers.resetMain()
     }
 
-    private val mockData = ResponseLocationData(
-        name = "Tokyo",
-        localNames = mapOf(
-            "cy" to "Tokyo",
-            "es" to "Tokio",
-            "pl" to "Tokio",
-            "en" to "Tokyo",
-            "tr" to "Tokyo",
-            "ja" to "東京都",
-        ),
-        lat = 35.6828387,
-        lon = 139.7594549,
-        country = "JP"
-    )
+    private val mockData =
+        ResponseLocationData(
+            name = "Tokyo",
+            localNames =
+                mapOf(
+                    "cy" to "Tokyo",
+                    "es" to "Tokio",
+                    "pl" to "Tokio",
+                    "en" to "Tokyo",
+                    "tr" to "Tokyo",
+                    "ja" to "東京都",
+                ),
+            lat = 35.6828387,
+            lon = 139.7594549,
+            country = "JP",
+        )
     private val response = listOf(mockData)
     private val emptyResponse = emptyList<ResponseLocationData>()
 
     @Test
-    fun searchSuccessResponse() = runTest {
-        val keyword = "Tokyo"
-        `when`(useCase.execute(keyword)).thenReturn(Response.success(response))
-        println(response)
-        viewModel.searchLocation(keyword)
-        assertEquals(mockData.toDomainModel(), viewModel.result.value)
-    }
+    fun searchSuccessResponse() =
+        runTest {
+            val keyword = "Tokyo"
+            `when`(useCase.execute(keyword)).thenReturn(Response.success(response))
+            println(response)
+            viewModel.searchLocation(keyword)
+            assertEquals(mockData.toDomainModel(), viewModel.result.value)
+        }
 
     @Test
-    fun searchNullResponse() = runTest {
-        val keyword = "Tokyo"
-        `when`(useCase.execute(keyword)).thenReturn(Response.success(null))
+    fun searchNullResponse() =
+        runTest {
+            val keyword = "Tokyo"
+            `when`(useCase.execute(keyword)).thenReturn(Response.success(null))
 
-        viewModel.searchLocation(keyword)
-        assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)
-    }
+            viewModel.searchLocation(keyword)
+            assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)
+        }
 
     @Test
-    fun searchEmptyResponse() = runTest {
-        val keyword = "Tokyo"
-        `when`(useCase.execute(keyword)).thenReturn(Response.success(emptyResponse))
+    fun searchEmptyResponse() =
+        runTest {
+            val keyword = "Tokyo"
+            `when`(useCase.execute(keyword)).thenReturn(Response.success(emptyResponse))
 
-        viewModel.searchLocation(keyword)
-        assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)
-    }
+            viewModel.searchLocation(keyword)
+            assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)
+        }
 }

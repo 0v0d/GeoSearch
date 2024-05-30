@@ -9,6 +9,6 @@ interface GeoLocationNetWorkDataSource {
     @GET("/geo/1.0/direct")
     suspend fun getLocation(
         @Query("q") q: String,
-        @Query("appid") appId: String
+        @Query("appid") appId: String,
     ): Response<List<ResponseLocationData>>
 }
