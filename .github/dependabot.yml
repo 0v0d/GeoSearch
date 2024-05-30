@@ -7,11 +7,11 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     registries: "*"
     labels: [ "version update" ]
     groups:
@@ -21,7 +21,7 @@ updates:
           - "org.jetbrains.kotlin.jvm"
           - "com.google.devtools.ksp"
           - "androidx.compose.compiler:compiler"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
 registries:
   maven-google:
     type: "maven-repository"
