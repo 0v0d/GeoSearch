@@ -29,8 +29,8 @@ jobs:
       - name: Create local.properties
         run: echo "API_KEY=${{ secrets.API_KEY }}" > local.properties
 
-      - name: Run ktlint
-        run: ./gradlew ktlint
+      - name: Execute Gradle check
+        run: ./gradlew check
 
       - name: Upload ktlint artifact
         uses: actions/upload-artifact@v3
