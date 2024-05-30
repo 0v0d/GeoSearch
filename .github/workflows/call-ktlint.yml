@@ -9,7 +9,6 @@ on:
 permissions:
   contents: read
   checks: write
-  pull-requests: write
 
 jobs:
   ktlint:
@@ -30,16 +29,8 @@ jobs:
       - name: Create local.properties
         run: echo "API_KEY=${{ secrets.API_KEY }}" > local.properties
 
-      - name: Collect ktlint errors
-        run: |
-          mkdir -p ktlint-reports
-          ./gradlew ktlintCheck > ktlint-reports/ktlint-output.txt || true
-        continue-on-error: true
-
-      - name: Read ktlint errors
-        id: read-ktlint-errors
-        if: failure()
-        run: cat ktlint-reports/ktlint-output.txt
+      - name: Execute Gradle check
+        run: ./gradlew check || true
         continue-on-error: true
 
       - name: Upload ktlint errors
@@ -47,29 +38,14 @@ jobs:
         if: failure()
         with:
           name: ktlint-errors
-          path: ktlint-reports/ktlint-output.txt
+          path: app/build/reports/
 
       - name: Upload ktlint artifact
         id: upload-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@4
         with:
           name: ktlint-output
-          path: 'app/build/reports/ktlint/ktlint.xml'
-
-      - name: Comment on PR with ktlint errors
-        if: failure()
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const ktlintErrors = fs.readFileSync('ktlint-reports/ktlint-output.txt', 'utf8');
-            const prNumber = context.payload.pull_request.number;
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: `### ktlint Errors\n\`\`\`\n${ktlintErrors}\n\`\`\``
-            });
+          path: 'app/build/ktlint.xml'
 
     outputs:
       artifact-name: ${{ steps.upload-artifact.outputs.name }}

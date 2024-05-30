@@ -1,11 +1,14 @@
 name: Auto Label PR
 
 on:
-  pull_request_target:
-    types: [opened]
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
 
 jobs:
   add-label:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     name: Add automerge Label
     runs-on: ubuntu-latest
 
