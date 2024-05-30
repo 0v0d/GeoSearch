@@ -32,20 +32,3 @@ jobs:
       - name: Execute Gradle check
         run: ./gradlew check || true
         continue-on-error: true
-
-      - name: Upload ktlint errors
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: ktlint-errors
-          path: app/build/reports/
-
-      - name: Upload ktlint artifact
-        id: upload-artifact
-        uses: actions/upload-artifact@4
-        with:
-          name: ktlint-output
-          path: 'app/build/ktlint.xml'
-
-    outputs:
-      artifact-name: ${{ steps.upload-artifact.outputs.name }}
