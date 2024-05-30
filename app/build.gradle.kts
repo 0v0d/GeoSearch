@@ -1,3 +1,7 @@
+@file:Suppress("ktlint:standard:no-unused-imports")
+
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -6,6 +10,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.secrets.gradle.plugin)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.ktlint)
 }
 
 android {
