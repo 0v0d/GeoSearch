@@ -1,0 +1,19 @@
+name: Run Dependabot every 10 minutes
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'  # 10分ごとに実行
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Dependabot
+        run: |
+          gh workflow run dependabot.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
