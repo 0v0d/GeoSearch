@@ -7,7 +7,7 @@
 
 	<fragment
 		android:id="@+id/InputFragment"
-		android:name="com.example.android_githubactions_sample.view.InputFragment"
+		android:name="com.example.androidgithubactionssample.view.InputFragment"
 		tools:layout="@layout/fragment_input">
 		<action
 			android:id="@+id/action_to_resultFragment"
@@ -16,7 +16,7 @@
 
 	<fragment
 		android:id="@+id/ResultFragment"
-		android:name="com.example.android_githubactions_sample.view.ResultFragment"
+		android:name="com.example.androidgithubactionssample.view.ResultFragment"
 		tools:layout="@layout/fragment_result">
 		<argument
 			android:name="inputText"

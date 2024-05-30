@@ -1,0 +1,51 @@
+name: Run ktlint
+
+on:
+  workflow_call:
+    secrets:
+      API_KEY:
+        required: true
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Create local.properties
+        run: echo "API_KEY=${{ secrets.API_KEY }}" > local.properties
+
+      - name: Execute Gradle check
+        run: ./gradlew check || true
+        continue-on-error: true
+
+      - name: Upload ktlint errors
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: ktlint-errors
+          path: app/build/reports/
+
+      - name: Upload ktlint artifact
+        id: upload-artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ktlint-output
+          path: 'app/build/ktlint.xml'
+
+    outputs:
+      artifact-name: ${{ steps.upload-artifact.outputs.name }}

@@ -1,4 +1,4 @@
-package com.example.android_githubactions_sample
+package com.example.androidgithubactionssample
 
 import androidx.annotation.IdRes
 import androidx.test.espresso.Espresso.onView
@@ -48,7 +48,7 @@ class CityNameDisplayTest {
         onView(withId(R.id.cityTextView))
             .waitShown(R.id.cityTextView)
             .check(matches(withText(city)))
-        //リソースを取得する
+        // リソースを取得する
         val resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
 
         // 緯度が正しく表示されていることを確認する
@@ -57,7 +57,7 @@ class CityNameDisplayTest {
         onView(withId(R.id.latitudeTextView))
             .check(matches(withText(containsString("$latitudeString$latExpected"))))
 
-        //経度が正しく表示されていることを確認する
+        // 経度が正しく表示されていることを確認する
         val longitudeString = resources.getString(R.string.longitude)
         val longExpected = "139.7594549"
         onView(withId(R.id.longitudeTextView))
@@ -72,7 +72,7 @@ class CityNameDisplayTest {
      */
     private fun ViewInteraction.waitShown(
         @IdRes resId: Int,
-        timeout: Long = 5_000
+        timeout: Long = 5_000,
     ): ViewInteraction {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
         val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

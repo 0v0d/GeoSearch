@@ -1,3 +1,7 @@
+@file:Suppress("ktlint:standard:no-unused-imports")
+
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -6,14 +10,15 @@ plugins {
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.secrets.gradle.plugin)
     alias(libs.plugins.dagger.hilt.android)
+    alias(libs.plugins.ktlint)
 }
 
 android {
-    namespace = "com.example.android_githubactions_sample"
+    namespace = "com.example.androidgithubactionssample"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.android_githubactions_sample"
+        applicationId = "com.example.androidgithubactionssample"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -27,7 +32,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -69,11 +74,9 @@ dependencies {
     testImplementation(libs.androidx.runner)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockito.core)
-    testImplementation (libs.androidx.core.testing)
-
+    testImplementation(libs.androidx.core.testing)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.uiautomator)
-
 }
