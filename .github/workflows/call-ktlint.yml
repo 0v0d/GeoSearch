@@ -23,6 +23,9 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Create local.properties
+        run: echo "API_KEY=${{ secrets.API_KEY }}" > local.properties
+
       - name: Run ktlint
         run: ./gradlew ktlint
 
