@@ -1,4 +1,4 @@
-package com.example.android_githubactions_sample.model.domain
+package com.example.androidgithubactionssample.model.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -16,4 +16,3 @@ data class LocationData(
         return localNames[Locale.getDefault().language] ?: ""
     }
 }
-

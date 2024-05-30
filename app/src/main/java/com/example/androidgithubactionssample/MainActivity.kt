@@ -1,9 +1,9 @@
-package com.example.android_githubactions_sample
+package com.example.androidgithubactionssample
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.example.android_githubactions_sample.databinding.ActivityMainBinding
+import com.example.androidgithubactionssample.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

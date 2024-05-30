@@ -1,4 +1,4 @@
-package com.example.android_githubactions_sample
+package com.example.androidgithubactionssample
 
 import androidx.annotation.IdRes
 import androidx.test.espresso.Espresso.onView

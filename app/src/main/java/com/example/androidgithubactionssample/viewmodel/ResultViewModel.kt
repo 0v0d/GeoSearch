@@ -1,11 +1,11 @@
-package com.example.android_githubactions_sample.viewmodel
+package com.example.androidgithubactionssample.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.android_githubactions_sample.usecase.GeoLocationUseCase
-import com.example.android_githubactions_sample.model.domain.LocationData
-import com.example.android_githubactions_sample.model.api.ResponseLocationData
-import com.example.android_githubactions_sample.model.api.toDomainModel
+import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
+import com.example.androidgithubactionssample.model.domain.LocationData
+import com.example.androidgithubactionssample.model.api.ResponseLocationData
+import com.example.androidgithubactionssample.model.api.toDomainModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

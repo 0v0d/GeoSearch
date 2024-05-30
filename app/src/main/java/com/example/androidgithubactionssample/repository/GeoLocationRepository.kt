@@ -1,9 +1,9 @@
-package com.example.android_githubactions_sample.repository
+package com.example.androidgithubactionssample.repository
 
-import com.example.android_githubactions_sample.BuildConfig
-import com.example.android_githubactions_sample.datasource.GeoLocationNetWorkDataSource
-import com.example.android_githubactions_sample.usecase.GeoLocationUseCase
-import com.example.android_githubactions_sample.model.api.ResponseLocationData
+import com.example.androidgithubactionssample.BuildConfig
+import com.example.androidgithubactionssample.datasource.GeoLocationNetWorkDataSource
+import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
+import com.example.androidgithubactionssample.model.api.ResponseLocationData
 import retrofit2.Response
 import javax.inject.Inject
 

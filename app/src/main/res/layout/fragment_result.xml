@@ -7,7 +7,7 @@
 
 		<variable
 			name="locationData"
-			type="com.example.android_githubactions_sample.model.domain.LocationData" />
+			type="com.example.androidgithubactionssample.model.domain.LocationData" />
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout

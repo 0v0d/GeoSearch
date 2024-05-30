@@ -1,4 +1,4 @@
-package com.example.android_githubactions_sample
+package com.example.androidgithubactionssample
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

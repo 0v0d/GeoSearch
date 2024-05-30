@@ -1,4 +1,4 @@
-package com.example.android_githubactions_sample.view
+package com.example.androidgithubactionssample.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.android_githubactions_sample.databinding.FragmentInputBinding
+import com.example.androidgithubactionssample.databinding.FragmentInputBinding
 
 class InputFragment : Fragment() {
     private var _binding: FragmentInputBinding? = null

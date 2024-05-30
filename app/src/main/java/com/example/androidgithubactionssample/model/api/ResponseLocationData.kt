@@ -1,7 +1,7 @@
-package com.example.android_githubactions_sample.model.api
+package com.example.androidgithubactionssample.model.api
 
 import android.os.Parcelable
-import com.example.android_githubactions_sample.model.domain.LocationData
+import com.example.androidgithubactionssample.model.domain.LocationData
 import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
@@ -16,13 +16,14 @@ data class ResponseLocationData(
     @Json(name = "lon")
     val lon: Double,
     @Json(name = "country")
-    val country: String
+    val country: String,
 ) : Parcelable
 
-fun ResponseLocationData.toDomainModel() = LocationData(
-    name = name,
-    localNames = localNames.mapValues { it.value },
-    lat = lat.toString(),
-    lon = lon.toString(),
-    country = country
-)
+fun ResponseLocationData.toDomainModel() =
+    LocationData(
+        name = name,
+        localNames = localNames.mapValues { it.value },
+        lat = lat.toString(),
+        lon = lon.toString(),
+        country = country,
+    )

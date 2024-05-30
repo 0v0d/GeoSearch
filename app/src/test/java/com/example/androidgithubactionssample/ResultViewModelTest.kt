@@ -1,11 +1,11 @@
-package com.example.android_githubactions_sample
+package com.example.androidgithubactionssample
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.android_githubactions_sample.model.api.ResponseLocationData
-import com.example.android_githubactions_sample.model.api.toDomainModel
-import com.example.android_githubactions_sample.model.domain.LocationData
-import com.example.android_githubactions_sample.usecase.GeoLocationUseCase
-import com.example.android_githubactions_sample.viewmodel.ResultViewModel
+import com.example.androidgithubactionssample.model.api.ResponseLocationData
+import com.example.androidgithubactionssample.model.api.toDomainModel
+import com.example.androidgithubactionssample.model.domain.LocationData
+import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
+import com.example.androidgithubactionssample.viewmodel.ResultViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher

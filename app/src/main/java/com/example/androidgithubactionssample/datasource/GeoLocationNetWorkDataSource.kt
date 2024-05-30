@@ -1,6 +1,6 @@
-package com.example.android_githubactions_sample.datasource
+package com.example.androidgithubactionssample.datasource
 
-import com.example.android_githubactions_sample.model.api.ResponseLocationData
+import com.example.androidgithubactionssample.model.api.ResponseLocationData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
