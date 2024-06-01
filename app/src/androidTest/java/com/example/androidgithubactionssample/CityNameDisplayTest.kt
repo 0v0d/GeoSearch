@@ -1,16 +1,7 @@
 package com.example.androidgithubactionssample
 
 import androidx.annotation.IdRes
-import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.ViewInteraction
-import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
-import androidx.test.espresso.action.ViewActions.pressImeActionButton
-import androidx.test.espresso.action.ViewActions.replaceText
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
@@ -20,11 +11,7 @@ import androidx.test.uiautomator.SearchCondition
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
-import org.hamcrest.CoreMatchers.containsString
-import org.junit.Rule
-import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.Locale
 
 /** テキスト入力をし、都市名などが表示されるかテストする */
 @RunWith(AndroidJUnit4::class)
