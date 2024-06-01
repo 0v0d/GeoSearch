@@ -72,7 +72,7 @@ fun LocationInfo(location: LocationData) {
             Row {
                 Text(text = stringResource(R.string.longitude) + location.lon)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = stringResource(R.string.longitude) + location.lat)
+                Text(text = stringResource(R.string.latitude) + location.lat)
             }
         } else {
             Text(text = "No location found")
