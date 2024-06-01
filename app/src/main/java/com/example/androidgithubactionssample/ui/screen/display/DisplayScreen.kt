@@ -45,10 +45,11 @@ fun DisplayScreen(
         topBar = { DisplayScreenTopAppBar(onClick = onClick) },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -60,6 +61,7 @@ fun DisplayScreen(
         }
     }
 }
+
 @Composable
 fun LocationInfo(location: LocationData) {
     Column {

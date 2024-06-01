@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">UITest</string>
-	<string name="enter_text">Enter text</string>
+	<string name="enter_text">"Enter City Name"</string>
 	<string name="latitude">latitude:</string>
 	<string name="longitude">longitude:</string>
 </resources>

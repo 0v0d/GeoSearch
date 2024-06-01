@@ -14,41 +14,42 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class DisplayScreenViewModel @Inject constructor(
-    private val repository: GeoLocationRepository
-) : ViewModel() {
-    private val _result = MutableStateFlow(LocationData("", emptyMap(), "0", "0", ""))
-    val result = _result.asStateFlow()
+class DisplayScreenViewModel
+    @Inject
+    constructor(
+        private val repository: GeoLocationRepository,
+    ) : ViewModel() {
+        private val _result = MutableStateFlow(LocationData("", emptyMap(), "0", "0", ""))
+        val result = _result.asStateFlow()
 
-    private val _loading = MutableStateFlow(true)
-    val loading = _loading.asStateFlow()
+        private val _loading = MutableStateFlow(true)
+        val loading = _loading.asStateFlow()
 
-    fun searchLocation(q: String) {
-        viewModelScope.launch {
-            _loading.value = true
-            val locationResponse = getLocation(q)
-            handleLocationResponse(locationResponse)
-            _loading.value = false
-        }
-    }
-
-    private fun handleLocationResponse(response: Response<List<ResponseLocationData>>?) {
-        try {
-            if (response?.isSuccessful == true) {
-                val locationData = response.body()?.firstOrNull()?.toDomainModel()
-                _result.value = locationData ?: LocationData("", emptyMap(), "0", "0", "")
+        fun searchLocation(q: String) {
+            viewModelScope.launch {
+                _loading.value = true
+                val locationResponse = getLocation(q)
+                handleLocationResponse(locationResponse)
+                _loading.value = false
             }
-        } catch (e: Exception) {
-            _result.value = LocationData("", emptyMap(), "0", "0", "")
+        }
+
+        private fun handleLocationResponse(response: Response<List<ResponseLocationData>>?) {
+            try {
+                if (response?.isSuccessful == true) {
+                    val locationData = response.body()?.firstOrNull()?.toDomainModel()
+                    _result.value = locationData ?: LocationData("", emptyMap(), "0", "0", "")
+                }
+            } catch (e: Exception) {
+                _result.value = LocationData("", emptyMap(), "0", "0", "")
+            }
+        }
+
+        private suspend fun getLocation(q: String): Response<List<ResponseLocationData>>? {
+            return try {
+                repository.execute(q)
+            } catch (e: Exception) {
+                null
+            }
         }
     }
-
-    private suspend fun getLocation(q: String): Response<List<ResponseLocationData>>? {
-        return try {
-            repository.execute(q)
-        } catch (e: Exception) {
-            null
-        }
-    }
-}
-

@@ -29,6 +29,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.androidgithubactionssample.R
 import com.example.androidgithubactionssample.theme.Blue
 
 @Composable
@@ -89,7 +90,7 @@ fun SearchBar(
                 }
             },
             textStyle = TextStyle(fontSize = 18.sp),
-            label = { Text(text = "Enter text", color = Color.Gray) },
+            label = { Text(text = (R.string.enter_text).toString(), color = Color.Gray) },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions =
                 KeyboardActions(

@@ -7,11 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class InputScreenViewModel @Inject constructor() : ViewModel() {
-    private val _inputText = mutableStateOf("")
-    val inputText: State<String> = _inputText
+class InputScreenViewModel
+    @Inject
+    constructor() : ViewModel() {
+        private val _inputText = mutableStateOf("")
+        val inputText: State<String> = _inputText
 
-    fun updateInputText(newText: String) {
-        _inputText.value = newText
+        fun updateInputText(newText: String) {
+            _inputText.value = newText
+        }
     }
-}

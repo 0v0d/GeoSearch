@@ -36,10 +36,11 @@ fun NavigationGraph(navController: NavHostController) {
         }
     }
 }
+
 fun NavHostController.navigateSingleTopTo(route: String) =
     this.navigate(route) {
         popUpTo(
-            this@navigateSingleTopTo.graph.findStartDestination().id
+            this@navigateSingleTopTo.graph.findStartDestination().id,
         ) {
             saveState = true
         }

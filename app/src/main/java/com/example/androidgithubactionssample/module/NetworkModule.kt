@@ -32,7 +32,6 @@ object NetworkModule {
         retrofit.create(GeoLocationNetWorkDataSource::class.java)
 
     @Provides
-    fun provideGeoLocationRepository(
-        geoLocationNetWorkDataSource: GeoLocationNetWorkDataSource
-    ): GeoLocationRepository = GeoLocationRepositoryImpl(geoLocationNetWorkDataSource)
+    fun provideGeoLocationRepository(geoLocationNetWorkDataSource: GeoLocationNetWorkDataSource): GeoLocationRepository =
+        GeoLocationRepositoryImpl(geoLocationNetWorkDataSource)
 }

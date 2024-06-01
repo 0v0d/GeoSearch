@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.androidgithubactionssample.ui.SearchBar
@@ -28,7 +29,7 @@ fun InputScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(TITLE) },
+                title = { Text("Input Screen") },
             )
         },
     ) { paddingValues ->
@@ -48,7 +49,10 @@ fun InputScreen(
                 onSearch = {
                     onSearch(inputText)
                 },
-                modifier = Modifier.fillMaxWidth(),
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .testTag("Search Input"),
             )
         }
     }

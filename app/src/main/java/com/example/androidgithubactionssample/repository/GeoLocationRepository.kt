@@ -10,21 +10,22 @@ interface GeoLocationRepository {
     suspend fun execute(q: String): Response<List<ResponseLocationData>>?
 }
 
-class GeoLocationRepositoryImpl @Inject constructor(
-    private val geoLocationService: GeoLocationNetWorkDataSource
-) : GeoLocationRepository {
-    private val appId = BuildConfig.API_KEY
+class GeoLocationRepositoryImpl
+    @Inject
+    constructor(
+        private val geoLocationService: GeoLocationNetWorkDataSource,
+    ) : GeoLocationRepository {
+        private val appId = BuildConfig.API_KEY
 
-    override suspend fun execute(q: String): Response<List<ResponseLocationData>>? {
-        return getLocation(q)
-    }
+        override suspend fun execute(q: String): Response<List<ResponseLocationData>>? {
+            return getLocation(q)
+        }
 
-    private suspend fun getLocation(q: String): Response<List<ResponseLocationData>>? {
-        return try {
-            geoLocationService.getLocation(q, appId)
-        } catch (e: Exception) {
-            null
+        private suspend fun getLocation(q: String): Response<List<ResponseLocationData>>? {
+            return try {
+                geoLocationService.getLocation(q, appId)
+            } catch (e: Exception) {
+                null
+            }
         }
     }
-}
-
