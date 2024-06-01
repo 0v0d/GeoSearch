@@ -1,4 +1,4 @@
-package com.example.androidgithubactionssample.datasource
+package com.example.androidgithubactionssample.data.remote
 
 import com.example.androidgithubactionssample.model.api.ResponseLocationData
 import retrofit2.Response

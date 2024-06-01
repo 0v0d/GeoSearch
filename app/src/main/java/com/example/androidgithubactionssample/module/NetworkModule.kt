@@ -1,8 +1,8 @@
 package com.example.androidgithubactionssample.module
 
-import com.example.androidgithubactionssample.datasource.GeoLocationNetWorkDataSource
+import com.example.androidgithubactionssample.data.remote.GeoLocationNetWorkDataSource
 import com.example.androidgithubactionssample.repository.GeoLocationRepository
-import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
+import com.example.androidgithubactionssample.repository.GeoLocationRepositoryImpl
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -32,5 +32,7 @@ object NetworkModule {
         retrofit.create(GeoLocationNetWorkDataSource::class.java)
 
     @Provides
-    fun provideGeoLocationUseCase(repository: GeoLocationRepository): GeoLocationUseCase = repository
+    fun provideGeoLocationRepository(
+        geoLocationNetWorkDataSource: GeoLocationNetWorkDataSource
+    ): GeoLocationRepository = GeoLocationRepositoryImpl(geoLocationNetWorkDataSource)
 }
