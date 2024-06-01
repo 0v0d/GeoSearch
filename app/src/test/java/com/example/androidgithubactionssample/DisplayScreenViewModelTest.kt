@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.androidgithubactionssample.model.api.ResponseLocationData
 import com.example.androidgithubactionssample.model.api.toDomainModel
 import com.example.androidgithubactionssample.model.domain.LocationData
-import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
-import com.example.androidgithubactionssample.viewmodel.ResultViewModel
+import com.example.androidgithubactionssample.repository.GeoLocationRepository
+import com.example.androidgithubactionssample.ui.screen.display.DisplayScreenViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -25,19 +25,19 @@ import retrofit2.Response
 
 @ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
-class ResultViewModelTest {
+class DisplayScreenViewModelTest {
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private lateinit var viewModel: ResultViewModel
+    private lateinit var viewModel: DisplayScreenViewModel
 
     @Mock
-    private lateinit var useCase: GeoLocationUseCase
+    private lateinit var repository: GeoLocationRepository
 
     @Before
     fun setup() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
-        viewModel = ResultViewModel(useCase)
+        viewModel = DisplayScreenViewModel(repository)
     }
 
     @After
@@ -68,7 +68,7 @@ class ResultViewModelTest {
     fun searchSuccessResponse() =
         runTest {
             val keyword = "Tokyo"
-            `when`(useCase.execute(keyword)).thenReturn(Response.success(response))
+            `when`(repository.execute(keyword)).thenReturn(Response.success(response))
             println(response)
             viewModel.searchLocation(keyword)
             assertEquals(mockData.toDomainModel(), viewModel.result.value)
@@ -78,7 +78,7 @@ class ResultViewModelTest {
     fun searchNullResponse() =
         runTest {
             val keyword = "Tokyo"
-            `when`(useCase.execute(keyword)).thenReturn(Response.success(null))
+            `when`(repository.execute(keyword)).thenReturn(Response.success(null))
 
             viewModel.searchLocation(keyword)
             assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)
@@ -88,7 +88,7 @@ class ResultViewModelTest {
     fun searchEmptyResponse() =
         runTest {
             val keyword = "Tokyo"
-            `when`(useCase.execute(keyword)).thenReturn(Response.success(emptyResponse))
+            `when`(repository.execute(keyword)).thenReturn(Response.success(emptyResponse))
 
             viewModel.searchLocation(keyword)
             assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)

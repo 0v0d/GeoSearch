@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-gem 'danger'
-gem 'danger-checkstyle_format'
+gem "danger", "9.3.2"
+gem "danger-checkstyle_format"
