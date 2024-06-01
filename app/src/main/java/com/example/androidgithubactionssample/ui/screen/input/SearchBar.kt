@@ -1,4 +1,4 @@
-package com.example.androidgithubactionssample.ui
+package com.example.androidgithubactionssample.ui.screen.input
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -90,7 +91,7 @@ fun SearchBar(
                 }
             },
             textStyle = TextStyle(fontSize = 18.sp),
-            label = { Text(text = (R.string.enter_text).toString(), color = Color.Gray) },
+            label = { Text(text = stringResource(R.string.enter_text), color = Color.Gray) },
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions =
                 KeyboardActions(

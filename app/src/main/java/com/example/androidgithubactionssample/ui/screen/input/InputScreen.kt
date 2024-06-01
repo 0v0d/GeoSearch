@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.androidgithubactionssample.ui.SearchBar
 
 const val TITLE = "InputScreen"
 
@@ -26,10 +25,11 @@ fun InputScreen(
     viewModel: InputScreenViewModel = hiltViewModel(),
 ) {
     val inputText by viewModel.inputText
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Input Screen") },
+                title = { Text(TITLE) },
             )
         },
     ) { paddingValues ->
@@ -47,12 +47,14 @@ fun InputScreen(
                     viewModel.updateInputText(newValue)
                 },
                 onSearch = {
-                    onSearch(inputText)
+                    if (inputText.isNotEmpty()) {
+                        onSearch(inputText)
+                    }
                 },
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .testTag("Search Input"),
+                        .testTag("SearchInput"),
             )
         }
     }

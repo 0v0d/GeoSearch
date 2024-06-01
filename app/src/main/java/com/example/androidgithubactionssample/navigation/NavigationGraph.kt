@@ -1,6 +1,9 @@
 package com.example.androidgithubactionssample.navigation
 
 import android.net.Uri
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -15,19 +18,70 @@ import com.example.androidgithubactionssample.ui.screen.input.InputScreen
 fun NavigationGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = "inputScreen",
+        startDestination = NavigationGraph.INPUT_SCREEN.name,
+        enterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { fullWidth -> fullWidth },
+                animationSpec = tween(),
+            )
+        },
+        exitTransition = {
+            slideOutHorizontally(
+                targetOffsetX = { fullWidth -> -fullWidth },
+                animationSpec = tween(),
+            )
+        },
+        popEnterTransition = {
+            slideInHorizontally(
+                initialOffsetX = { fullWidth -> -fullWidth },
+                animationSpec = tween(),
+            )
+        },
+        popExitTransition = {
+            slideOutHorizontally(
+                targetOffsetX = { fullWidth -> fullWidth },
+                animationSpec = tween(),
+            )
+        },
     ) {
-        composable("inputScreen") {
+        composable(NavigationGraph.INPUT_SCREEN.name) {
             InputScreen(
                 onSearch = { text ->
                     val safeName = Uri.encode(text)
-                    navController.navigateSingleTopTo("displayScreen/$safeName")
+                    navController.navigateSingleTopTo(
+                        NavigationGraph.DISPLAY_SCREEN.name +
+                            "/$safeName",
+                    )
                 },
             )
         }
         composable(
-            "displayScreen/{inputText}",
+            route = NavigationGraph.DISPLAY_SCREEN.name + "/{inputText}",
             arguments = listOf(navArgument("inputText") { type = NavType.StringType }),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { fullWidth -> fullWidth },
+                    animationSpec = tween(),
+                )
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { fullWidth -> -fullWidth },
+                    animationSpec = tween(),
+                )
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { fullWidth -> -fullWidth },
+                    animationSpec = tween(),
+                )
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { fullWidth -> fullWidth },
+                    animationSpec = tween(),
+                )
+            },
         ) { backStackEntry ->
             DisplayScreen(
                 inputText = backStackEntry.arguments?.getString("inputText") ?: "",
@@ -47,3 +101,8 @@ fun NavHostController.navigateSingleTopTo(route: String) =
         launchSingleTop = true
         restoreState = true
     }
+
+private enum class NavigationGraph {
+    INPUT_SCREEN,
+    DISPLAY_SCREEN,
+}

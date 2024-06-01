@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.dagger.hilt.android)
+
     kapt(libs.dagger.hilt.android.compiler)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
@@ -92,6 +93,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.uiautomator)
+    androidTestImplementation(libs.androidx.ui.test.junit4.android)
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }
 
 ktlint {
