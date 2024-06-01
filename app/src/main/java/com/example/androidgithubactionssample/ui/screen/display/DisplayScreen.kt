@@ -23,8 +23,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.androidgithubactionssample.R
 import com.example.androidgithubactionssample.model.domain.LocationData
 import com.example.androidgithubactionssample.theme.Purple80
 
@@ -66,11 +68,11 @@ fun DisplayScreen(
 fun LocationInfo(location: LocationData) {
     Column {
         if (location.name.isNotEmpty()) {
-            Text(text = "Location: ${location.name}")
+            Text(text = location.name)
             Row {
-                Text(text = "Longitude : ${location.lon}")
+                Text(text = stringResource(R.string.longitude) + location.lon)
                 Spacer(modifier = Modifier.width(8.dp))
-                Text(text = "Latitude : ${location.lat}")
+                Text(text = stringResource(R.string.longitude) + location.lat)
             }
         } else {
             Text(text = "No location found")
