@@ -15,7 +15,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
       - run: chmod +x ./gradlew
-      - run: ./gradlew ktlintFormat
       - run: ./gradlew ktlintCheck
         continue-on-error: true
       - uses: ruby/setup-ruby@v1
