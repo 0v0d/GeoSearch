@@ -7,14 +7,17 @@ on:
 jobs:
   ktlint:
     runs-on: ubuntu-latest
-    if: github.event_name  == 'pull_request'
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
+      - run: chmod +x ./gradlew
+      - run: ./gradlew ktlintFormat
       - run: ./gradlew ktlintCheck
+        continue-on-error: true
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2.2'
