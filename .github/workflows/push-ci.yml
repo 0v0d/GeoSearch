@@ -23,8 +23,3 @@ jobs:
     uses: ./.github/workflows/call-unit-test.yml
     secrets:
       API_KEY: ${{ secrets.API_KEY }}
-
-  Ktlint:
-    uses: ./.github/workflows/call-ktlint.yml
-    secrets:
-      API_KEY: ${{ secrets.API_KEY }}
