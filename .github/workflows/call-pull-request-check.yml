@@ -27,7 +27,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: zulu
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Setup Ruby
@@ -60,28 +60,12 @@ jobs:
   ktlint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v4
-
-      - name: Setup reviewdog
-        uses: reviewdog/action-setup@v1
+      - name: Checkout
+        uses: actions/checkout@master
         with:
-          reviewdog_version: latest
-
-      - name: Make gradlew executable
-        run: chmod +x ./gradlew
-
-      - name: Ktlint
-        run: ./gradlew ktlintCheck
-        continue-on-error: true
-
-      - name: Comment PR by reviewdog
-        if: ${{ steps.ktlint.outcome == 'failure' }}
-        run: |
-          find ./*/build/reports/ktlint/*/*.xml \
-            -type f \
-            -exec sh -c "cat {} | reviewdog -f=checkstyle -diff='git diff FETCH_HEAD' -reporter=github-pr-review" \;
-
-      - name: Lint Error Handling
-        if: ${{ steps.ktlint.outcome == 'failure' }}
-        run: exit 1
+          fetch-depth: 1
+      - name: ktlint
+        uses: ScaCap/action-ktlint@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
