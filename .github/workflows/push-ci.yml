@@ -13,11 +13,11 @@ permissions:
   contents: read
   pull-requests: write
 
-env:
-  JAVA_VERSION: 17
 jobs:
-  Lint:
-    uses: ./.github/workflows/call-lint.yml
+  PullRequestCheck:
+    uses: ./.github/workflows/call-pull-request-check.yml
+    secrets:
+      API_KEY: ${{ secrets.API_KEY }}
 
   UnitTests:
     uses: ./.github/workflows/call-unit-test.yml

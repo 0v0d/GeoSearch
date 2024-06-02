@@ -3,17 +3,18 @@ name: Pull Request Check
 on:
   workflow_call:
 env:
-  JAVA_VERSION: 17 # gradleに対応するものを選ぶ
-  GRADLE_VERSION: 8.2
+  JAVA_VERSION: 17
+  GRADLE_VERSION: 8.7
 
 permissions:
   pull-requests: write
+  contents: read
+  checks: write
 
 jobs:
   android-lint:
     runs-on: ubuntu-latest
     steps:
-      # setup
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: Setup Java
@@ -25,28 +26,18 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Create local.properties
+        run: echo "API_KEY=${{ secrets.API_KEY }}" > local.properties
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: ${{ env.GRADLE_VERSION }}
-      - name: Setup reviewdog
-        uses: reviewdog/action-setup@v1
-        with:
-          reviewdog_version: latest
-      # android lintを実行
+
       - name: Android Lint
         id: android-lint
         run: ./gradlew lint
-      # report
-      - name: Comment PR by reviewdog
-        if: always()
-        run: |
-          find ./*/build/reports/android-lint/lintResults.sarif \
-            -type f \
-            -exec sh -c "cat {} | reviewdog -f=sarif -reporter=github-pr-review" \;
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+
       - name: Check and report lint results
         uses: hidakatsuya/action-report-android-lint@v1.2.0
         with:
@@ -55,11 +46,10 @@ jobs:
   ktlint:
     runs-on: ubuntu-latest
     steps:
-      # setup
       - name: Checkout sources
         uses: actions/checkout@v4
       - name: ktlint
-        uses: ScaCap/action-ktlint@master
+        run: ./gradlew ktlintCheck
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
