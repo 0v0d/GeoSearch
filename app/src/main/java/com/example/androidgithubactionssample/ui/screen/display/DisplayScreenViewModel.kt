@@ -22,34 +22,31 @@ class DisplayScreenViewModel
         private val _result = MutableStateFlow(LocationData("", emptyMap(), "0", "0", ""))
         val result = _result.asStateFlow()
 
-        private val _loading = MutableStateFlow(true)
+        private val _loading = MutableStateFlow(false)
         val loading = _loading.asStateFlow()
 
         fun searchLocation(q: String) {
             viewModelScope.launch {
                 _loading.value = true
-                val locationResponse = getLocation(q)
-                handleLocationResponse(locationResponse)
-                _loading.value = false
+                try {
+                    val locationResponse = getLocation(q)
+                    handleLocationResponse(locationResponse)
+                } catch (e: Exception) {
+                    _result.value = LocationData("", emptyMap(), "0", "0", "")
+                    _loading.value = false
+                }
             }
         }
 
         private fun handleLocationResponse(response: Response<List<ResponseLocationData>>?) {
-            try {
-                if (response?.isSuccessful == true) {
-                    val locationData = response.body()?.firstOrNull()?.toDomainModel()
-                    _result.value = locationData ?: LocationData("", emptyMap(), "0", "0", "")
-                }
-            } catch (e: Exception) {
-                _result.value = LocationData("", emptyMap(), "0", "0", "")
+            if (response?.isSuccessful == true) {
+                val locationData = response.body()?.firstOrNull()?.toDomainModel()
+                _result.value = locationData ?: LocationData("", emptyMap(), "0", "0", "")
             }
+            _loading.value = false
         }
 
         private suspend fun getLocation(q: String): Response<List<ResponseLocationData>>? {
-            return try {
-                repository.execute(q)
-            } catch (e: Exception) {
-                null
-            }
+            return repository.execute(q)
         }
     }

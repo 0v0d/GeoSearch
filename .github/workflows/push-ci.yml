@@ -2,7 +2,7 @@ name: CI
 
 on:
   pull_request:
-    branches: ["master", "dev"]
+    branches: [ "master", "dev" ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number }}
@@ -14,8 +14,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  Lint:
-    uses: ./.github/workflows/call-lint.yml
+  PullRequestCheck:
+    uses: ./.github/workflows/call-pull-request-check.yml
     secrets:
       API_KEY: ${{ secrets.API_KEY }}
 
