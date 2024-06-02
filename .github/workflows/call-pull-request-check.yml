@@ -52,12 +52,10 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
 
-      - name: Setup
-        uses: ./.github/actions/setup-tools
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
         with:
-          java: true
-          gradle: true
-          reviewdog: true
+          reviewdog_version: latest
 
       - name: Ktlint
         id: ktlint
