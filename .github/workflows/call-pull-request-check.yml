@@ -82,3 +82,6 @@ jobs:
             -type f \
             -exec sh -c "cat {} | reviewdog -f=checkstyle -diff='git diff FETCH_HEAD' -reporter=github-pr-review" \;
 
+      - name: Lint Error Handling
+        if: ${{ steps.ktlint.outcome == 'failure' }}
+        run: exit 1
