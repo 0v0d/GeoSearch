@@ -18,8 +18,6 @@ env:
 jobs:
   Lint:
     uses: ./.github/workflows/call-lint.yml
-    secrets:
-      API_KEY: ${{ secrets.API_KEY }}
 
   UnitTests:
     uses: ./.github/workflows/call-unit-test.yml
