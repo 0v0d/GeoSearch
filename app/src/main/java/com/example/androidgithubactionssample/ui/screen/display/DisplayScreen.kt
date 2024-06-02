@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -34,6 +35,7 @@ import com.example.androidgithubactionssample.theme.Purple80
 fun DisplayScreen(
     inputText: String,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: DisplayScreenViewModel = hiltViewModel(),
 ) {
     val location by viewModel.result.collectAsState()
@@ -48,7 +50,7 @@ fun DisplayScreen(
     ) { paddingValues ->
         Column(
             modifier =
-                Modifier
+                modifier
                     .fillMaxSize()
                     .padding(paddingValues)
                     .padding(16.dp),
@@ -65,11 +67,14 @@ fun DisplayScreen(
 }
 
 @Composable
-fun LocationInfo(location: LocationData) {
+fun LocationInfo(
+    location: LocationData,
+    modifier: Modifier = Modifier,
+) {
     Column {
         if (location.name.isNotEmpty()) {
             Text(text = location.name)
-            Row {
+            Row(modifier = modifier.padding(top = 8.dp)) {
                 Text(text = stringResource(R.string.longitude) + location.lon)
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(text = stringResource(R.string.latitude) + location.lat)
@@ -82,7 +87,10 @@ fun LocationInfo(location: LocationData) {
 
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun DisplayScreenTopAppBar(onClick: () -> Unit) {
+fun DisplayScreenTopAppBar(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     TopAppBar(
         title = { Text("Display Screen") },
         navigationIcon = {
@@ -97,5 +105,6 @@ fun DisplayScreenTopAppBar(onClick: () -> Unit) {
             TopAppBarDefaults.topAppBarColors(
                 containerColor = Purple80,
             ),
+        modifier = modifier.fillMaxWidth(),
     )
 }
