@@ -22,13 +22,11 @@ const val TITLE = "InputScreen"
 @Composable
 fun InputScreen(
     onSearch: (String) -> Unit,
-    modifier: Modifier = Modifier,
     viewModel: InputScreenViewModel = hiltViewModel(),
 ) {
     val inputText by viewModel.inputText
 
     Scaffold(
-        modifier = modifier.fillMaxWidth(),
         topBar = {
             TopAppBar(
                 title = { Text(TITLE) },
