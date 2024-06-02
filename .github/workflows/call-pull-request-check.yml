@@ -48,9 +48,26 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
-      - name: ktlint
-        run: ./gradlew ktlintCheck
+        
+      - name: Setup
+        uses: ./.github/actions/setup-tools
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-pr-review
-          fail_on_error: true
+          java: true
+          gradle: true
+          reviewdog: true
+
+      - name: Ktlint
+        id: ktlint
+        run: ./gradlew ktlintCheck
+        continue-on-error: true
+
+      - name: Comment PR by reviewdog
+        run: |
+          find ./*/build/reports/ktlint/*/*.xml \
+            -type f \
+            -exec sh -c "cat {} | reviewdog -f=checkstyle -diff='git diff FETCH_HEAD' -reporter=github-pr-review" \;
+
+      - name: Lint Error Handling
+        if: ${{ steps.ktlint.outcome == 'failure' }}
+        run: exit 1
+
