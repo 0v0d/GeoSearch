@@ -72,16 +72,19 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Ktlint
-        run: ./gradlew ktlintCheck
-        continue-on-error: true
+        run: |
+          ./gradlew ktlintCheck
+          if [ $? -ne 0 ]; then
+            exit 1
+          fi
 
       - name: Comment PR by reviewdog
-        if: ${{ steps.ktlint.outcome == 'failure' }}
+        if: ${{ failure() }}
         run: |
           find ./*/build/reports/ktlint/*/*.xml \
             -type f \
             -exec sh -c "cat {} | reviewdog -f=checkstyle -diff='git diff FETCH_HEAD' -reporter=github-pr-review" \;
 
       - name: Lint Error Handling
-        if: ${{ steps.ktlint.outcome == 'failure' }}
+        if: ${{ failure() }}
         run: exit 1
