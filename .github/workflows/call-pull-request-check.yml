@@ -27,7 +27,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
+          distribution: zulu
           java-version: ${{ env.JAVA_VERSION }}
 
       - name: Setup Ruby
