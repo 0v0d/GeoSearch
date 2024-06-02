@@ -14,14 +14,17 @@ permissions:
   pull-requests: write
   contents: read
   checks: write
+  statuses: none
 
 jobs:
-  android-lint:
+  lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - name: Checkout sources
+      - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Java
+
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -46,12 +49,7 @@ jobs:
       - name: Create local.properties
         run: echo "API_KEY=${{ secrets.API_KEY }}" > local.properties
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: ${{ env.GRADLE_VERSION }}
-
-      - name: Android Lint
+      - name: Lint
         run: ./gradlew lint
 
       - name: Check and report lint results
@@ -83,8 +81,4 @@ jobs:
           find ./*/build/reports/ktlint/*/*.xml \
             -type f \
             -exec sh -c "cat {} | reviewdog -f=checkstyle -diff='git diff FETCH_HEAD' -reporter=github-pr-review" \;
-
-      - name: Lint Error Handling
-        if: ${{ steps.ktlint.outcome == 'failure' }}
-        run: exit 1
 

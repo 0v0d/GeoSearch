@@ -3,7 +3,6 @@ import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.androidx.navigation.safeargs)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.secrets.gradle.plugin)
@@ -57,19 +56,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    lint {
-        sarifOutput = File(project.buildDir, "reports/android-lint/lintResults.sarif")
-        textOutput = File(project.buildDir, "reports/android-lint/lintResults.txt")
-        htmlOutput = File(project.buildDir, "reports/android-lint/lintResults.html")
-        xmlReport = false
-    }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-
+    implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -80,12 +73,11 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     implementation(libs.dagger.hilt.android)
-
     kapt(libs.dagger.hilt.android.compiler)
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.moshi)
     implementation(libs.moshi.kotlin)
-    implementation(libs.androidx.hilt.navigation.compose)
+    lintChecks(libs.compose.lint.checks)
     debugImplementation(libs.leakcanary)
 
     testImplementation(libs.junit)
@@ -102,7 +94,6 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4.android)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    lintChecks(libs.compose.lint.checks)
 }
 
 ktlint {
