@@ -2,6 +2,9 @@ name: Pull Request Check
 
 on:
   workflow_call:
+    secrets:
+      API_KEY:
+        required: true
 env:
   JAVA_VERSION: 17
   GRADLE_VERSION: 8.7
@@ -48,7 +51,7 @@ jobs:
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
-        
+
       - name: Setup
         uses: ./.github/actions/setup-tools
         with:
