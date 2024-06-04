@@ -24,6 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -39,7 +40,7 @@ fun DisplayScreen(
     viewModel: DisplayScreenViewModel = hiltViewModel(),
 ) {
     val location by viewModel.result.collectAsState()
-    val isLoading by viewModel.loading.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
 
     LaunchedEffect(inputText) {
         viewModel.searchLocation(inputText)
@@ -73,7 +74,7 @@ fun LocationInfo(
 ) {
     Column {
         if (location.name.isNotEmpty()) {
-            Text(text = location.name)
+            Text(text = location.name, modifier = Modifier.testTag("locationName"))
             Row(modifier = modifier.padding(top = 8.dp)) {
                 Text(text = stringResource(R.string.longitude) + location.lon)
                 Spacer(modifier = Modifier.width(8.dp))

@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.androidgithubactionssample.model.api.ResponseLocationData
 import com.example.androidgithubactionssample.model.api.toDomainModel
 import com.example.androidgithubactionssample.model.domain.LocationData
-import com.example.androidgithubactionssample.repository.GeoLocationRepository
+import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,23 +17,22 @@ import javax.inject.Inject
 class DisplayScreenViewModel
     @Inject
     constructor(
-        private val repository: GeoLocationRepository,
+        private val useCase: GeoLocationUseCase,
     ) : ViewModel() {
         private val _result = MutableStateFlow(LocationData("", emptyMap(), "0", "0", ""))
         val result = _result.asStateFlow()
 
-        private val _loading = MutableStateFlow(false)
-        val loading = _loading.asStateFlow()
+        private val _isLoading = MutableStateFlow(false)
+        val isLoading = _isLoading.asStateFlow()
 
-        fun searchLocation(q: String) {
+        fun searchLocation(keyword: String) {
             viewModelScope.launch {
-                _loading.value = true
+                _isLoading.value = true
                 try {
-                    val locationResponse = getLocation(q)
-                    handleLocationResponse(locationResponse)
+                    handleLocationResponse(useCase(keyword))
                 } catch (e: Exception) {
                     _result.value = LocationData("", emptyMap(), "0", "0", "")
-                    _loading.value = false
+                    _isLoading.value = false
                 }
             }
         }
@@ -43,10 +42,6 @@ class DisplayScreenViewModel
                 val locationData = response.body()?.firstOrNull()?.toDomainModel()
                 _result.value = locationData ?: LocationData("", emptyMap(), "0", "0", "")
             }
-            _loading.value = false
-        }
-
-        private suspend fun getLocation(q: String): Response<List<ResponseLocationData>>? {
-            return repository.execute(q)
+            _isLoading.value = false
         }
     }

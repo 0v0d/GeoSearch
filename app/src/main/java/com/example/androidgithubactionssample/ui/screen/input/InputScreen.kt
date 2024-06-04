@@ -56,7 +56,7 @@ fun InputScreen(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .testTag("SearchInput"),
+                        .testTag("SearchBar"),
             )
         }
     }
