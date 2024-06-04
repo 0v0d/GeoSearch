@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -34,7 +35,7 @@ import com.example.androidgithubactionssample.R
 import com.example.androidgithubactionssample.theme.Blue
 
 @Composable
-fun SearchBar(
+fun SearchTextField(
     query: String,
     onQueryChange: (String) -> Unit,
     onSearch: () -> Unit,
@@ -70,7 +71,8 @@ fun SearchBar(
             modifier =
                 Modifier
                     .weight(1f)
-                    .padding(horizontal = 8.dp),
+                    .padding(horizontal = 8.dp)
+                    .testTag("textField"),
             colors =
                 TextFieldDefaults.colors(
                     cursorColor = Blue,

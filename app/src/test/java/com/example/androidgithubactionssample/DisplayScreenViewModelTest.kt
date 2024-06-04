@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.androidgithubactionssample.model.api.ResponseLocationData
 import com.example.androidgithubactionssample.model.api.toDomainModel
 import com.example.androidgithubactionssample.model.domain.LocationData
-import com.example.androidgithubactionssample.repository.GeoLocationRepository
 import com.example.androidgithubactionssample.ui.screen.display.DisplayScreenViewModel
+import com.example.androidgithubactionssample.usecase.GeoLocationUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -32,12 +32,12 @@ class DisplayScreenViewModelTest {
     private lateinit var viewModel: DisplayScreenViewModel
 
     @Mock
-    private lateinit var repository: GeoLocationRepository
+    private lateinit var useCase: GeoLocationUseCase
 
     @Before
     fun setup() {
         Dispatchers.setMain(UnconfinedTestDispatcher())
-        viewModel = DisplayScreenViewModel(repository)
+        viewModel = DisplayScreenViewModel(useCase = useCase)
     }
 
     @After
@@ -68,7 +68,7 @@ class DisplayScreenViewModelTest {
     fun searchSuccessResponse() =
         runTest {
             val keyword = "Tokyo"
-            `when`(repository.execute(keyword)).thenReturn(Response.success(response))
+            `when`(useCase(keyword)).thenReturn(Response.success(response))
             println(response)
             viewModel.searchLocation(keyword)
             assertEquals(mockData.toDomainModel(), viewModel.result.value)
@@ -78,7 +78,7 @@ class DisplayScreenViewModelTest {
     fun searchNullResponse() =
         runTest {
             val keyword = "Tokyo"
-            `when`(repository.execute(keyword)).thenReturn(Response.success(null))
+            `when`(useCase(keyword)).thenReturn(Response.success(null))
 
             viewModel.searchLocation(keyword)
             assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)
@@ -88,7 +88,7 @@ class DisplayScreenViewModelTest {
     fun searchEmptyResponse() =
         runTest {
             val keyword = "Tokyo"
-            `when`(repository.execute(keyword)).thenReturn(Response.success(emptyResponse))
+            `when`(useCase(keyword)).thenReturn(Response.success(emptyResponse))
 
             viewModel.searchLocation(keyword)
             assertEquals(LocationData("", emptyMap(), "0", "0", ""), viewModel.result.value)

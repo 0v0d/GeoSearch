@@ -43,7 +43,7 @@ fun InputScreen(
                     .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            SearchBar(
+            SearchTextField(
                 query = inputText,
                 onQueryChange = { newValue ->
                     viewModel.updateInputText(newValue)
@@ -56,7 +56,7 @@ fun InputScreen(
                 modifier =
                     Modifier
                         .fillMaxWidth()
-                        .testTag("SearchInput"),
+                        .testTag("SearchBar"),
             )
         }
     }
