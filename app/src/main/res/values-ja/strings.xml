@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">UITest</string>
-	<string name="enter_text">テキストを入力</string>
-	<string name="latitude">緯度:</string>
-	<string name="longitude">経度:</string>
+    <string name="app_name">UITest</string>
+    <string name="enter_text">都市の名前を入力</string>
+    <string name="latitude">緯度:</string>
+    <string name="longitude">経度:</string>
 </resources>

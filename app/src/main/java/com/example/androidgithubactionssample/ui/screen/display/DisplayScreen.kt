@@ -32,6 +32,8 @@ import com.example.androidgithubactionssample.R
 import com.example.androidgithubactionssample.model.domain.LocationData
 import com.example.androidgithubactionssample.theme.Purple80
 
+const val TITLE = "DisplayScreen"
+
 @Composable
 fun DisplayScreen(
     inputText: String,
@@ -68,6 +70,30 @@ fun DisplayScreen(
 }
 
 @Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun DisplayScreenTopAppBar(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    TopAppBar(
+        title = { Text(TITLE) },
+        navigationIcon = {
+            IconButton(onClick = { onClick() }) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = "Back",
+                )
+            }
+        },
+        colors =
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = Purple80,
+            ),
+        modifier = modifier.fillMaxWidth(),
+    )
+}
+
+@Composable
 fun LocationInfo(
     location: LocationData,
     modifier: Modifier = Modifier,
@@ -84,28 +110,4 @@ fun LocationInfo(
             Text(text = "No location found")
         }
     }
-}
-
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-fun DisplayScreenTopAppBar(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    TopAppBar(
-        title = { Text("Display Screen") },
-        navigationIcon = {
-            IconButton(onClick = { onClick() }) {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back",
-                )
-            }
-        },
-        colors =
-            TopAppBarDefaults.topAppBarColors(
-                containerColor = Purple80,
-            ),
-        modifier = modifier.fillMaxWidth(),
-    )
 }
