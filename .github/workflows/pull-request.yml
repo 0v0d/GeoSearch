@@ -21,3 +21,4 @@ jobs:
           pr_title: "Pulling ${{ github.ref }} into master" # プルリクエストのタイトル
           pr_body: "*An automated PR for syncing changes from ${{ github.ref }} into master*" # プルリクエストの本文
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
