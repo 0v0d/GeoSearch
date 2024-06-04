@@ -70,7 +70,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
 
-    ktlint(libs.ktlint.cli) {
+    ktlint("com.pinterest.ktlint:ktlint-cli: 1.2.1") {
         attributes {
             attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
         }
