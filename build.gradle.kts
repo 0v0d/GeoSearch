@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.dagger.hilt.android) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.secrets.gradle.plugin) apply false
-    alias(libs.plugins.ktlint) apply false
 }
 allprojects {
     afterEvaluate {

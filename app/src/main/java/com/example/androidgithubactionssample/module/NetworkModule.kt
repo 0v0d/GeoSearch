@@ -29,11 +29,13 @@ object NetworkModule {
             .build()
 
     @Provides
-    fun provideGeoLocationNetWorkDataSource(retrofit: Retrofit): GeoLocationNetWorkDataSource = retrofit.create(GeoLocationNetWorkDataSource::class.java)
+    fun provideGeoLocationNetWorkDataSource(retrofit: Retrofit): GeoLocationNetWorkDataSource =
+        retrofit.create(GeoLocationNetWorkDataSource::class.java)
 
     @Provides
     fun provideGeoLocationRepository(repository: GeoLocationRepositoryImpl): GeoLocationRepository = repository
 
     @Provides
-    fun provideGeoLocationUseCase(geoLocationRepository: GeoLocationRepository): GeoLocationUseCase = GeoLocationUseCase(geoLocationRepository)
+    fun provideGeoLocationUseCase(geoLocationRepository: GeoLocationRepository): GeoLocationUseCase =
+        GeoLocationUseCase(geoLocationRepository)
 }
