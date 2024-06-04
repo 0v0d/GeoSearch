@@ -22,5 +22,3 @@ jobs:
           pr_body: "*An automated PR for syncing changes from ${{ github.ref }} into master*" # プルリクエストの本文
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: CI
-        uses: ./.github/workflows/call-pull-request-check.yml
