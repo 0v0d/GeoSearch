@@ -21,10 +21,12 @@ jobs:
           pr_body: "*An automated PR for syncing changes from ${{ github.ref }} into master*"  # プルリクエストの本文
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Trigger CI Workflow
-        if: steps.create_pr.outputs.pr_number != ''
-        uses: benc-uk/workflow-dispatch@v1
+  call-ci:
+    needs: create-pull-request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call CI
+        uses: ./.github/workflows/call-ci.yml
         with:
-          workflow: Pull Request CI
-          token: ${{ secrets.GITHUB_TOKEN }}
-          ref: master
+          pr_number: ${{ steps.create_pr.outputs.pr_number }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
