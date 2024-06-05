@@ -12,9 +12,9 @@ jobs:
   pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: pull-request
         run: |
-          gh_pr_up() { gh pr create --source "dev" --base "master" || gh pr edit --source "dev" --base "master"}
+          gh_pr_up() { gh pr create $* || gh pr edit $* }
           gh_pr_up --title  "Pulling ${{ github.ref }} into master"  --body  "*An automated PR for syncing changes from ${{ github.ref }} into master*"
 
