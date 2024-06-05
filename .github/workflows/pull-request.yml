@@ -1,4 +1,4 @@
-name: Crete Pull Request
+name: Pull Request
 
 on:
   push:
