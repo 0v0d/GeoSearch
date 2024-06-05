@@ -8,6 +8,7 @@ on:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,7 +16,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Pull Request"
+          token: ${{ secrets.GITHUB_TOKEN }}
           title: "Pulling ${{ github.ref }} into master"
           body: "*An automated PR for syncing changes from ${{ github.ref }} into master*"
           base: master # プルリクエスト先のブランチ
