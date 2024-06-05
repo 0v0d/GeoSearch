@@ -26,7 +26,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call CI
-        uses: ./.github/workflows/call-ci.yml
-        with:
-          pr_number: ${{ steps.create_pr.outputs.pr_number }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./.github/workflows/push-ci.yml
