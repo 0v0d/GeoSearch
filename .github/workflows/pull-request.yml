@@ -18,4 +18,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          PULL_REQUEST_URI=$(gh pr create --base main --head develop --title "Pulling ${{ github.ref }} into master" --body "*An automated PR for syncing changes from ${{ github.ref }} into master*" -l "automerge" --reviewer user-name)
+          PULL_REQUEST_URI=$(gh pr create --base master --head develop --title "Pulling ${{ github.ref }} into master" --body "*An automated PR for syncing changes from ${{ github.ref }} into master*" -l "automerge" --reviewer user-name)
