@@ -22,8 +22,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   call-ci:
-    needs: create-pull-request
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call CI
-        uses: ./.github/workflows/push-ci.yml
+    uses: ./.github/workflows/push-ci.yml
+    secrets:
+      API_KEY: ${{ secrets.API_KEY }}

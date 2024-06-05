@@ -6,11 +6,6 @@ on:
       API_KEY:
         required: true
 
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number }}
-  cancel-in-progress: true
-
 permissions:
   checks: write
   contents: read
