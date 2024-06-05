@@ -1,4 +1,4 @@
-name: Crete Pull Request
+name: Create Pull Request
 
 on:
   push:
@@ -6,19 +6,25 @@ on:
       - dev  # プッシュ対象のブランチ名
 
 jobs:
-
-  pull-request:
+  create-pull-request:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Pull Request
+      - name: Create Pull Request
+        id: create_pr
         uses: repo-sync/pull-request@v2
         with:
           source_branch: "dev"  # プッシュ元のブランチ
-          destination_branch: "master" # プルリクエスト先のブランチ
-          pr_title: "Pulling ${{ github.ref }} into master" # プルリクエストのタイトル
-          pr_body: "*An automated PR for syncing changes from ${{ github.ref }} into master*" # プルリクエストの本文
+          destination_branch: "master"  # プルリクエスト先のブランチ
+          pr_title: "Pulling ${{ github.ref }} into master"  # プルリクエストのタイトル
+          pr_body: "*An automated PR for syncing changes from ${{ github.ref }} into master*"  # プルリクエストの本文
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Trigger CI Workflow
+        if: steps.create_pr.outputs.pr_number != ''
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Pull Request CI
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: master
