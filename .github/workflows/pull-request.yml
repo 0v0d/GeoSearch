@@ -10,14 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+      - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Pulling ${{ github.ref }} into master"
-          body: "*An automated PR for syncing changes from ${{ github.ref }} into master*"
-          base: master # プルリクエスト先のブランチ
-          labels: automerge
+          ref: develop
+      - name: create pull request
+        id: create-pull-request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PULL_REQUEST_URI=$(gh pr create --base main --head develop --title "Pulling ${{ github.ref }} into master" --body "*An automated PR for syncing changes from ${{ github.ref }} into master*" -l "automerge" --reviewer user-name)
