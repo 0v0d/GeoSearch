@@ -6,7 +6,7 @@ on:
     types: [opened, synchronize]
 
   workflow_run:
-    workflows: ["Pull Request"]
+    workflows: ["Crete Pull Request"]
     types:
       - completed
 
