@@ -6,7 +6,7 @@ on:
       - dev  # プッシュ対象のブランチ名
 
 jobs:
-  CloudList:
+  create-pull-request:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -18,5 +18,5 @@ jobs:
           commit-message: "Pull Request"
           title: "Pulling ${{ github.ref }} into master"
           body: "*An automated PR for syncing changes from ${{ github.ref }} into master*"
-          base: main # プルリクエスト先のブランチ
+          base: master # プルリクエスト先のブランチ
           labels: automerge
