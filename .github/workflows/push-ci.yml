@@ -8,7 +8,7 @@ on:
 
   pull_request:
     branches: ["master", "dev"]
-    types: [synchronize]
+    types: [opened, synchronize]
 
 
 concurrency:
