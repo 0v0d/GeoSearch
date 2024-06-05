@@ -6,19 +6,17 @@ on:
       - dev  # プッシュ対象のブランチ名
 
 jobs:
-
-  pull-request:
+  create-pull-request:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Pull Request
-        uses: repo-sync/pull-request@v2
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
         with:
-          source_branch: "dev"  # プッシュ元のブランチ
-          destination_branch: "master" # プルリクエスト先のブランチ
-          pr_title: "Pulling ${{ github.ref }} into master" # プルリクエストのタイトル
-          pr_body: "*An automated PR for syncing changes from ${{ github.ref }} into master*" # プルリクエストの本文
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
+          commit-message: "Pull Request"
+          title: "Pulling ${{ github.ref }} into master"
+          body: "*An automated PR for syncing changes from ${{ github.ref }} into master*"
+          base: master # プルリクエスト先のブランチ
+          labels: automerge
