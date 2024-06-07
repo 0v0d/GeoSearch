@@ -1,6 +1,6 @@
 name: Dev Branch Validation
 
-# TODO プッシュではなく, プルリクエストの場合は pull_request に変更したい
+# TODO プッシュではなく、プルリクエストの場合は pull_request に変更したい
 on:
   push:
     branches:
