@@ -19,10 +19,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           PR_EXISTS=$(gh pr list --base master --head dev --json number --jq '.[0].number')
-          echo "::set-output name=pr_exists::$PR_EXISTS"
+          echo "pr_exists=$PR_EXISTS" >> $GITHUB_ENV
 
       - name: Create pull request
-        if: steps.check-pr.outputs.pr_exists == ''
+        if: env.pr_exists == ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
