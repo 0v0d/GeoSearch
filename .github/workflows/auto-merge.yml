@@ -2,7 +2,7 @@ name: Auto Merge
 
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ["Dev Branch Validation"]
     types:
       - completed
 
