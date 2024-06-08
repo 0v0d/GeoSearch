@@ -13,7 +13,7 @@ permissions:
 jobs:
   StaticAnalysis:
     uses: ./.github/workflows/call-static-analysis.yml
-    with:
+    secrets:
       API_KEY: ${{ secrets.API_KEY }}
 
   AutoMarge:
