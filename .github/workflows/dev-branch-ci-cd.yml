@@ -12,7 +12,8 @@ concurrency:
 permissions:
   checks: write
   contents: read
-  
+  pull-requests: write
+
 jobs:
   StaticAnalysis:
     uses: ./.github/workflows/call-static-analysis.yml
@@ -24,7 +25,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
     if: success()
     steps:
       - name: Auto Merge
