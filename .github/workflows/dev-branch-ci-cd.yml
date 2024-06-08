@@ -19,9 +19,6 @@ jobs:
     name: CI/CD
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
       - name: Static Analysis
         uses: ./.github/workflows/call-static-analysis.yml
         with:
