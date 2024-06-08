@@ -5,6 +5,10 @@ on:
     branches: ["master", "dev"]
     types: [opened, synchronize]
 
+concurrency:
+  group: dev-branch-ci-cd-${{ github.event.number }}
+  cancel-in-progress: true
+  
 permissions:
   checks: write
   contents: read
