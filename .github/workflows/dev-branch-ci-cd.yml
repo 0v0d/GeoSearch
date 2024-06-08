@@ -15,17 +15,19 @@ permissions:
   pull-requests: write
 
 jobs:
-  ci_cd:
-    name: CI/CD
+  StaticAnalysis:
+    uses: ./.github/workflows/call-static-analysis.yml
+    with:
+      API_KEY: ${{ secrets.API_KEY }}
+
+  AutoMarge:
     runs-on: ubuntu-latest
     steps:
-      - name: Static Analysis
-        uses: ./.github/workflows/call-static-analysis.yml
-        with:
-          API_KEY: ${{ secrets.API_KEY }}
-
+      - name: Checkout Repository
+        uses: actions/checkout@v4
       - name: Auto Merge
         if: success()
         uses: pascalgn/automerge-action@v0.16.3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
