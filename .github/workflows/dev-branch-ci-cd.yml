@@ -2,8 +2,7 @@ name: Dev Branch CI-CD
 
 on:
   pull_request:
-    branches:
-      - dev
+    branches: ["master", "dev"]
     types: [opened, synchronize]
 
 concurrency:
