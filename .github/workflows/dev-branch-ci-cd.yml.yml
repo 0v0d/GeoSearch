@@ -25,3 +25,16 @@ jobs:
     uses: ./.github/workflows/call-unit-test.yml
     secrets:
       API_KEY: ${{ secrets.API_KEY }}
+
+  AutoMerge:
+    needs: [PullRequestCheck, UnitTests]
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Automerge
+        uses: pascalgn/automerge-action@v0.16.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
