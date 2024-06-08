@@ -16,7 +16,6 @@ permissions:
   pull-requests: write
 
 jobs:
-
   ci_cd:
     name: CI/CD
     runs-on: ubuntu-latest
