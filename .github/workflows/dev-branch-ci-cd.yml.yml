@@ -1,4 +1,4 @@
-name: Dev Branch Validation
+name: Dev Branch CI CD
 
 # TODO プッシュではなく、プルリクエストの場合は pull_request に変更したい
 on:
