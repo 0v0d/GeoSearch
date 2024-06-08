@@ -12,8 +12,7 @@ concurrency:
 permissions:
   checks: write
   contents: read
-  pull-requests: write
-
+  
 jobs:
   StaticAnalysis:
     uses: ./.github/workflows/call-static-analysis.yml
@@ -23,10 +22,11 @@ jobs:
   AutoMarge:
     needs: StaticAnalysis
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     if: success()
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
       - name: Auto Merge
         uses: pascalgn/automerge-action@v0.16.3
         env:
