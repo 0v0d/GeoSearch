@@ -1,9 +1,6 @@
 name: Auto Label PR
 
-on:
-  pull_request_target:
-    branches: ["master", "developer"]
-    types: [opened]
+on: pull_request
 
 permissions:
   pull-requests: write
