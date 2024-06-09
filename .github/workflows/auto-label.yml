@@ -48,3 +48,4 @@ jobs:
               issue_number: pr.number,
               labels: [labelToAdd]
             });
+
