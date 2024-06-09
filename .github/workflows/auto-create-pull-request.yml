@@ -5,6 +5,9 @@ on:
     branches:
       - dev
 
+permissions:
+  pull-requests: write
+
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
@@ -31,4 +34,5 @@ jobs:
             --head dev \
             --title "Pulling ${{ github.ref }} into master" \
             --body "*An automated PR for syncing changes from ${{ github.ref }} into master*" \
+            -l "auto" \
             --reviewer user-name
