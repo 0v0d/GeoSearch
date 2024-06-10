@@ -2,11 +2,11 @@ name: Dev Branch CI-CD
 
 on:
   pull_request:
-    branches: ["master", "dev"]
+    branches: ["master", "developer"]
     types: [opened, synchronize]
 
 concurrency:
-  group: dev-branch-ci-cd-${{ github.event.number }}
+  group: developer-branch-ci-cd-${{ github.event.number }}
   cancel-in-progress: true
 
 permissions:
@@ -31,5 +31,3 @@ jobs:
         uses: pascalgn/automerge-action@v0.16.3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-

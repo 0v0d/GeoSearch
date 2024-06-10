@@ -2,6 +2,7 @@
 # package ecosystems to update and where the package manifests are located.
 # Please see the documentation for all configuration options:
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
 version: 2
 updates:
   - package-ecosystem: "github-actions"
@@ -13,7 +14,7 @@ updates:
     schedule:
       interval: "daily"
     registries: "*"
-    labels: [ "version update" ]
+    labels: ["version update"]
     groups:
       kotlin-ksp-compose:
         patterns:
@@ -27,4 +28,4 @@ registries:
     type: "maven-repository"
     url: "https://maven.google.com"
     replaces-base: true
-    
+
