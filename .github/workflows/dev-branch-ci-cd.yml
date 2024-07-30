@@ -2,7 +2,7 @@ name: Dev Branch CI-CD
 
 on:
   pull_request:
-    branches: ["master", "developer"]
+    branches: ["master", "dev"]
     types: [opened, synchronize]
 
 concurrency:
@@ -20,7 +20,7 @@ jobs:
     secrets:
       API_KEY: ${{ secrets.API_KEY }}
 
-  AutoMarge:
+  AutoMerge:
     needs: StaticAnalysis
     runs-on: ubuntu-latest
     permissions:
