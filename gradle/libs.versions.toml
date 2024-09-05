@@ -23,7 +23,7 @@ ktlint = "12.1.0"
 composeBom = "2024.08.00"
 navigationCompose = "2.8.0"
 uiTestJunit4Android = "1.6.8"
-uiTestManifest = "1.6.8"
+uiTestManifest = "1.7.0"
 uiTooling = "1.6.8"
 hiltNavigationCompose = "1.2.0"
 
