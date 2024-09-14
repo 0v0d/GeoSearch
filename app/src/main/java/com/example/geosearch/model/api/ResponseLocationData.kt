@@ -1,11 +1,10 @@
-package com.example.androidgithubactionssample.model.api
+package com.example.geosearch.model.api
 
-import android.os.Parcelable
-import com.example.androidgithubactionssample.model.domain.LocationData
+import com.example.geosearch.model.domain.LocationData
 import com.squareup.moshi.Json
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
-@Parcelize
+@Serializable
 data class ResponseLocationData(
     @Json(name = "name")
     val name: String,
@@ -17,7 +16,7 @@ data class ResponseLocationData(
     val lon: Double,
     @Json(name = "country")
     val country: String,
-) : Parcelable
+)
 
 fun ResponseLocationData.toDomainModel() =
     LocationData(

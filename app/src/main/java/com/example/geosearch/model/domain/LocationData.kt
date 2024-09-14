@@ -1,17 +1,16 @@
-package com.example.androidgithubactionssample.model.domain
+package com.example.geosearch.model.domain
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 import java.util.Locale
 
-@Parcelize
+@Serializable
 data class LocationData(
     val name: String,
     val localNames: Map<String, String>,
     val lat: String,
     val lon: String,
     val country: String,
-) : Parcelable {
+) {
     fun getLocalName(): String {
         return localNames[Locale.getDefault().language] ?: ""
     }
