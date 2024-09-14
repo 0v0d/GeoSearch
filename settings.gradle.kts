@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Android-GitHubActions-Sample"
+rootProject.name = "GeoSearch"
 include(":app")
  
